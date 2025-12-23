@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "spooky",
+	"version": "${version}",
+	"name": "Spooky",
+	"description": "Let's see how spooked we can make Kyle",
+	"authors": [
+		"Ashton",
+		"Jim"
+	],
+	"contact": {
+		"homepage": "https://nukethemfromorbit.com/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/spooky/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.nukethemfromorbit.spooky.Spooky"
+		],
+		"fabric-datagen": [
+			"com.nukethemfromorbit.spooky.SpookyDataGenerator"
+		],
+		"client": [
+			"com.nukethemfromorbit.spooky.SpookyClient"
+		]
+	},
+	"mixins": [
+		"spooky.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.3",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
