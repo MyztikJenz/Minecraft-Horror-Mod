@@ -3,7 +3,12 @@
 	"package": "com.nukethemfromorbit.spooky.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+		"PlayerAdvancementTrackerMixin",
+		"PlayerManagerMixin",
+		"ServerPlayerEntityMixin",
+		"ServerWorldMixin",
+		"ZombieEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
