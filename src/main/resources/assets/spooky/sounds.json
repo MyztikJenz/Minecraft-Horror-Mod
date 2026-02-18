@@ -4,5 +4,35 @@
       "sounds": [
         "spooky:inception"
       ]
-    }
+    },
+    "i_see_you": {
+    "subtitle": "sounds.spookymod.i_see_you",
+    "sounds": [
+      "spooky:i_see_you"
+    ]
+  },
+  "angry_ghost_voice": {
+    "subtitle": "sounds.spookymod.angry_ghost_voice",
+    "sounds": [
+      "spooky:angry_ghost_voice"
+    ]
+  },
+  "creepy_ghost_scream": {
+    "subtitle": "sounds.spookymod.creepy_ghost_scream",
+    "sounds": [
+      "spooky:creepy_ghost_scream"
+    ]
+  },
+  "ghost_breath": {
+    "subtitle": "sounds.spookymod.ghost_breath",
+    "sounds": [
+      "spooky:ghost_breath"
+    ]
+  },
+  "static_noise_ghost": {
+    "subtitle": "sounds.spookymod.static_noise_ghost",
+    "sounds": [
+      "spooky:static_noise_ghost"
+    ]
+  }
 }
