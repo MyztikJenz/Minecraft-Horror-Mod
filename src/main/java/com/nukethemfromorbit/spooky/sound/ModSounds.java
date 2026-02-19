@@ -9,6 +9,9 @@ import net.minecraft.util.Identifier;
 public final class ModSounds {
 	public static final SoundEvent SPOOKY_INCEPTION = register("inception");
 	public static final SoundEvent SPOOKY_I_SEE_YOU = register("i_see_you");
+	public static final SoundEvent SPOOKY_ANGRY_GHOST_VOICE = register("angry_ghost_voice");
+	public static final SoundEvent SPOOKY_CREEPY_GHOST_SCREAM = register("creepy_ghost_scream");
+	public static final SoundEvent SPOOKY_CRISPY_STATIC = register("crispy_static");
 
 	private ModSounds() {
 	}

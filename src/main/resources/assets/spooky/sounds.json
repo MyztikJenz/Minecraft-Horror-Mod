@@ -34,5 +34,11 @@
     "sounds": [
       "spooky:static_noise_ghost"
     ]
+  },
+  "crispy_static": {
+    "subtitle": "sounds.spookymod.crispy_static",
+    "sounds": [
+      "spooky:crispy_static"
+    ]
   }
 }

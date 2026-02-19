@@ -10,6 +10,10 @@
 		"ServerWorldMixin",
 		"ZombieEntityMixin"
 	],
+	"client": [
+		"BiomeEffectSoundPlayerMixin",
+		"MusicTrackerMixin"
+	],
 	"injectors": {
 		"defaultRequire": 1
 	},
