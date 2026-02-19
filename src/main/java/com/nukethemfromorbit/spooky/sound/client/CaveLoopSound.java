@@ -22,6 +22,11 @@ public class CaveLoopSound extends MovingSoundInstance {
 
 	@Override
 	public void tick() {
+		if (player.isRemoved() || player.getHealth() <= 0.0f) {
+			this.setDone();
+			return;
+		}
+
 		this.x = player.getX();
 		this.y = player.getY();
 		this.z = player.getZ();
