@@ -40,5 +40,56 @@
     "sounds": [
       "spooky:crispy_static"
     ]
+  },
+  "horror_background_atmosphere": {
+    "subtitle": "sounds.spookymod.horror_background_atmosphere",
+    "sounds": [
+      "spooky:horror_background_atmosphere"
+    ]
+  },
+  "scary_music_box": {
+    "subtitle": "sounds.spookymod.scary_music_box",
+    "sounds": [
+      "spooky:scary_music_box"
+    ]
+  },"avoid": {
+  "subtitle": "sounds.spookymod.avoid",
+  "sounds": [
+    "spooky:avoid"
+  ]
+}
+,"female_horror_laughter": {
+  "subtitle": "sounds.spookymod.female_horror_laughter",
+  "sounds": [
+    "spooky:female_horror_laughter"
+  ]
+}
+,"flesh_growing": {
+  "subtitle": "sounds.spookymod.flesh_growing",
+  "sounds": [
+    "spooky:flesh_growing"
+  ]
+}
+,"open_the_door": {
+  "subtitle": "sounds.spookymod.open_the_door",
+  "sounds": [
+    "spooky:open_the_door"
+  ]
+}
+,"quick_screech": {
+  "subtitle": "sounds.spookymod.quick_screech",
+  "sounds": [
+    "spooky:quick_screech"
+  ]
+},
+  "combined_spooky_recipes": {
+    "subtitle": "sounds.spookymod.combined_spooky_recipes",
+    "sounds": [
+      "spooky:avoid",
+      "spooky:female_horror_laughter",
+      "spooky:flesh_growing",
+      "spooky:open_the_door",
+      "spooky:quick_screech"
+    ]
   }
 }

@@ -1,5 +1,6 @@
 package com.nukethemfromorbit.spooky.mixin;
 
+import com.nukethemfromorbit.spooky.Spooky;
 import com.nukethemfromorbit.spooky.sound.ModSounds;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -48,7 +49,9 @@ public class ServerPlayerEntityMixin {
 		}
 
 		ServerPlayerEntity player = (ServerPlayerEntity)(Object)this;
-		player.playSoundToPlayer(ModSounds.SPOOKY_INCEPTION, SoundCategory.PLAYERS, 1.0f, 1.0f);
+		for (int i = 0; i < unlocked; i++) {
+			player.playSoundToPlayer(ModSounds.SPOOKY_COMBINED_SPOOKY_RECIPES, SoundCategory.PLAYERS, 0.7f, 1.0f);
+		}
 	}
 
 	@Inject(method = "teleportTo", at = @At("HEAD"))
@@ -99,19 +102,22 @@ public class ServerPlayerEntityMixin {
 		if (!day && !spooky$nightTriggered) {
 			spooky$nightTriggered = true;
 			world.setWeather(0, 600, true, true);
-			player.playSoundToPlayer(ModSounds.SPOOKY_INCEPTION, SoundCategory.PLAYERS, 1.0f, 1.0f);
+//			player.playSoundToPlayer(ModSounds.SPOOKY_INCEPTION, SoundCategory.PLAYERS, 1.0f, 1.0f);
 		}
 	}
 
 	@Unique
 	private void spooky$removeNearbyHostiles(ServerPlayerEntity player) {
 		boolean blindnessActive = player.hasStatusEffect(StatusEffects.BLINDNESS);
-		double radius = 8.0;
+		double radius = 10.0;
 		Box box = Box.of(player.getPos(), radius * 2.0, radius * 2.0, radius * 2.0);
 		int removed = 0;
-		for (HostileEntity hostile : player.getWorld().getEntitiesByClass(HostileEntity.class, box, entity -> true)) {
-			if (!hostile.isRemoved()) {
-				hostile.remove(Entity.RemovalReason.DISCARDED);
+		for (Entity entity : player.getWorld().getEntitiesByClass(Entity.class, box, e -> e.getType().getSpawnGroup() == SpawnGroup.MONSTER)) {
+			if (entity.getType() == EntityType.ENDER_DRAGON) {
+				continue;
+			}
+			if (!entity.isRemoved()) {
+				entity.remove(Entity.RemovalReason.DISCARDED);
 				removed++;
 			}
 		}

@@ -2,6 +2,7 @@ package com.nukethemfromorbit.spooky;
 
 import com.nukethemfromorbit.spooky.item.ModItems;
 import com.nukethemfromorbit.spooky.sound.ModSounds;
+import com.nukethemfromorbit.spooky.util.ServerScheduler;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -19,5 +20,6 @@ public class Spooky implements ModInitializer {
 
 		ModItems.registerModItems();
 		ModSounds.registerModSounds();
+		ServerScheduler.register();
 	}
 }

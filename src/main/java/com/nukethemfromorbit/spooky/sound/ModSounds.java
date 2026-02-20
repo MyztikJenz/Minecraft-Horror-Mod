@@ -11,7 +11,16 @@ public final class ModSounds {
 	public static final SoundEvent SPOOKY_I_SEE_YOU = register("i_see_you");
 	public static final SoundEvent SPOOKY_ANGRY_GHOST_VOICE = register("angry_ghost_voice");
 	public static final SoundEvent SPOOKY_CREEPY_GHOST_SCREAM = register("creepy_ghost_scream");
+	public static final SoundEvent SPOOKY_GHOST_BREATH = register("ghost_breath");
 	public static final SoundEvent SPOOKY_CRISPY_STATIC = register("crispy_static");
+	public static final SoundEvent SPOOKY_HORROR_BACKGROUND_ATMOSPHERE = register("horror_background_atmosphere");
+	public static final SoundEvent SPOOKY_SCARY_MUSIC_BOX = register("scary_music_box");
+	public static final SoundEvent SPOOKY_AVOID = register("avoid");
+	public static final SoundEvent SPOOKY_FEMALE_HORROR_LAUGHTER = register("female_horror_laughter");
+	public static final SoundEvent SPOOKY_FLESH_GROWING = register("flesh_growing");
+	public static final SoundEvent SPOOKY_OPEN_THE_DOOR = register("open_the_door");
+	public static final SoundEvent SPOOKY_QUICK_SCREECH = register("quick_screech");
+	public static final SoundEvent SPOOKY_COMBINED_SPOOKY_RECIPES = register("combined_spooky_recipes");
 
 	private ModSounds() {
 	}

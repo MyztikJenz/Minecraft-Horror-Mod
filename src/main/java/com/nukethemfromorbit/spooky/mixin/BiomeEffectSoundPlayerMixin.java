@@ -4,13 +4,13 @@ import com.nukethemfromorbit.spooky.sound.ModSounds;
 import com.nukethemfromorbit.spooky.sound.client.CaveLoopSound;
 import com.nukethemfromorbit.spooky.sound.client.CaveLoopState;
 import java.util.Optional;
-import java.util.Set;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.sound.BiomeEffectSoundPlayer;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundManager;
 import net.minecraft.sound.BiomeMoodSound;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
 import net.minecraft.util.math.random.Random;
@@ -20,12 +20,10 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BiomeEffectSoundPlayer.class)
 public class BiomeEffectSoundPlayerMixin {
-	private static final float MOOD_SPEED_MULTIPLIER = 2.0F;
 	private static final float MOOD_WARNING_THRESHOLD = 0.7F;
 
 	@Shadow
@@ -41,14 +39,13 @@ public class BiomeEffectSoundPlayerMixin {
 	@Unique
 	private boolean spooky$playedMoodWarning;
 	@Unique
-	private CaveLoopSound spooky$caveLoop;
-
-//	@Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/sound/BiomeMoodSound;getCultivationTicks()I"))
-//	private int spooky$boostMoodCultivation(BiomeMoodSound sound) {
-//		int base = sound.getCultivationTicks();
-//		int boosted = Math.max(1, (int)(base / MOOD_SPEED_MULTIPLIER));
-//		return boosted;
-//	}
+	private CaveLoopSound spooky$caveStaticLoop;
+	@Unique
+	private CaveLoopSound spooky$caveMusicBoxLoop;
+	@Unique
+	private CaveLoopSound spooky$netherAtmosphereLoop;
+	@Unique
+	private CaveLoopSound spooky$netherStaticLoop;
 
 	@Inject(method = "tick", at = @At("TAIL"))
 	private void spooky$playMoodWarning(CallbackInfo ci) {
@@ -76,15 +73,54 @@ public class BiomeEffectSoundPlayerMixin {
 		boolean inCaveArea = spooky$isInCaveArea();
 		CaveLoopState.setActive(inCaveArea);
 		if (inCaveArea) {
-			if (spooky$caveLoop == null || spooky$caveLoop.isDone()) {
-				spooky$caveLoop = new CaveLoopSound(player);
-				soundManager.play(spooky$caveLoop);
-			}
-		} else if (spooky$caveLoop != null) {
-			soundManager.stop(spooky$caveLoop);
-			spooky$caveLoop.stop();
-			spooky$caveLoop = null;
+			spooky$caveStaticLoop = spooky$ensureLoop(spooky$caveStaticLoop, ModSounds.SPOOKY_CRISPY_STATIC, 0.7f, 1.0f);
+			spooky$caveMusicBoxLoop = spooky$ensureLoop(spooky$caveMusicBoxLoop, ModSounds.SPOOKY_SCARY_MUSIC_BOX, 0.7f, 1.0f);
+		} else {
+			spooky$stopLoop(spooky$caveStaticLoop);
+			spooky$stopLoop(spooky$caveMusicBoxLoop);
+			spooky$caveStaticLoop = spooky$cleanupLoop(spooky$caveStaticLoop);
+			spooky$caveMusicBoxLoop = spooky$cleanupLoop(spooky$caveMusicBoxLoop);
 		}
+
+		boolean inNether = player.getWorld().getRegistryKey() == World.NETHER;
+		if (inNether) {
+			spooky$netherAtmosphereLoop = spooky$ensureLoop(spooky$netherAtmosphereLoop, ModSounds.SPOOKY_HORROR_BACKGROUND_ATMOSPHERE, 0.7f, 1.0f);
+			spooky$netherStaticLoop = spooky$ensureLoop(spooky$netherStaticLoop, ModSounds.SPOOKY_CRISPY_STATIC, 0.7f, 1.0f);
+		} else {
+			spooky$stopLoop(spooky$netherAtmosphereLoop);
+			spooky$stopLoop(spooky$netherStaticLoop);
+			spooky$netherAtmosphereLoop = spooky$cleanupLoop(spooky$netherAtmosphereLoop);
+			spooky$netherStaticLoop = spooky$cleanupLoop(spooky$netherStaticLoop);
+		}
+	}
+
+	@Unique
+	private CaveLoopSound spooky$ensureLoop(CaveLoopSound current, SoundEvent sound, float volume, float pitch) {
+		if (current == null || current.isDone()) {
+			current = new CaveLoopSound(player, sound, volume, pitch);
+			soundManager.play(current);
+		} else if (current.isFadingOut()) {
+			current.fadeIn();
+		}
+		return current;
+	}
+
+	@Unique
+	private void spooky$stopLoop(CaveLoopSound loop) {
+		if (loop == null) {
+			return;
+		}
+		if (!loop.isFadingOut()) {
+			loop.fadeOut();
+		}
+	}
+
+	@Unique
+	private CaveLoopSound spooky$cleanupLoop(CaveLoopSound loop) {
+		if (loop != null && loop.isDone()) {
+			return null;
+		}
+		return loop;
 	}
 
 	@Unique

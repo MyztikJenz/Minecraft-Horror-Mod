@@ -23,6 +23,6 @@ public class PlayerManagerMixin {
 			return;
 		}
 
-		respawned.playSoundToPlayer(ModSounds.SPOOKY_I_SEE_YOU, SoundCategory.PLAYERS, 1.0f, 1.0f);
+		respawned.playSoundToPlayer(ModSounds.SPOOKY_I_SEE_YOU, SoundCategory.PLAYERS, 0.25f, 1.0f);
 	}
 }

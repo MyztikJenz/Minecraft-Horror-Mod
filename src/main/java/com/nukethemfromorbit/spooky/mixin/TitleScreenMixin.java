@@ -4,6 +4,9 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.SplashTextRenderer;
+import com.nukethemfromorbit.spooky.sound.ModSounds;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
@@ -34,7 +37,7 @@ public class TitleScreenMixin {
 		)
 	)
 	private void spooky$replaceSplashText(SplashTextRenderer renderer, DrawContext context, int screenWidth, TextRenderer textRenderer, int alpha) {
-		String text = "Kyle is doomed!";
+		String text = "elterbug is doomed… DOOMED!";
 		context.getMatrices().push();
 		context.getMatrices().translate(screenWidth / 2.0F + 123.0F, 69.0F, 0.0F);
 		context.getMatrices().multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-20.0F));
@@ -43,5 +46,12 @@ public class TitleScreenMixin {
 		context.getMatrices().scale(f, f, f);
 		context.drawCenteredTextWithShadow(textRenderer, text, 0, -8, 0x8B0000 | alpha);
 		context.getMatrices().pop();
+	}
+
+	@Inject(method = "onDisplayed", at = @At("TAIL"))
+	private void spooky$playTitleSound(CallbackInfo ci) {
+		MinecraftClient.getInstance()
+			.getSoundManager()
+			.play(PositionedSoundInstance.master(ModSounds.SPOOKY_CREEPY_GHOST_SCREAM, 1.0f, 0.1f));
 	}
 }
