@@ -60,6 +60,7 @@ public class LivingEntityMixin {
 		spooky$spawnBlindnessHostiles(player);
 	}
 
+
 	@Unique
 	private void spooky$spawnBlindnessHostiles(ServerPlayerEntity player) {
 		ServerWorld world = (ServerWorld)player.getWorld();

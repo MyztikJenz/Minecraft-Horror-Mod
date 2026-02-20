@@ -6,6 +6,7 @@
 		"BlockMixin",
 		"ExampleMixin",
 		"LivingEntityMixin",
+		"MilkBucketItemMixin",
 		"PlayerAdvancementTrackerMixin",
 		"PlayerManagerMixin",
 		"ServerPlayerEntityMixin",

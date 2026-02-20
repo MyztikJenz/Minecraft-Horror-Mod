@@ -52,6 +52,18 @@
     "sounds": [
       "spooky:scary_music_box"
     ]
+  },
+  "radio_static": {
+    "subtitle": "sounds.spookymod.radio_static",
+    "sounds": [
+      "spooky:radio_static"
+    ]
+  },
+  "rusty_swings": {
+    "subtitle": "sounds.spookymod.rusty_swings",
+    "sounds": [
+      "spooky:rusty_swings"
+    ]
   },"avoid": {
   "subtitle": "sounds.spookymod.avoid",
   "sounds": [
@@ -102,6 +114,12 @@
     "subtitle": "sounds.spookymod.thunder_crack",
     "sounds": [
       "spooky:thunder_crack"
+    ]
+  },
+  "lol_milk": {
+    "subtitle": "sounds.spookymod.lol_milk",
+    "sounds": [
+      "spooky:you_didnt_say_the_magic_word"
     ]
   }
 }

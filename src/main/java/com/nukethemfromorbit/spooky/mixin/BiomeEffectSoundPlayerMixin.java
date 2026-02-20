@@ -46,6 +46,12 @@ public class BiomeEffectSoundPlayerMixin {
 	private CaveLoopSound spooky$netherAtmosphereLoop;
 	@Unique
 	private CaveLoopSound spooky$netherStaticLoop;
+	@Unique
+	private CaveLoopSound spooky$endStaticLoop;
+	@Unique
+	private CaveLoopSound spooky$endRadioStaticLoop;
+	@Unique
+	private CaveLoopSound spooky$endRustySwingsLoop;
 
 	@Inject(method = "tick", at = @At("TAIL"))
 	private void spooky$playMoodWarning(CallbackInfo ci) {
@@ -91,6 +97,20 @@ public class BiomeEffectSoundPlayerMixin {
 			spooky$stopLoop(spooky$netherStaticLoop);
 			spooky$netherAtmosphereLoop = spooky$cleanupLoop(spooky$netherAtmosphereLoop);
 			spooky$netherStaticLoop = spooky$cleanupLoop(spooky$netherStaticLoop);
+		}
+
+		boolean inEnd = player.getWorld().getRegistryKey() == World.END;
+		if (inEnd) {
+			spooky$endStaticLoop = spooky$ensureLoop(spooky$endStaticLoop, ModSounds.SPOOKY_CRISPY_STATIC, 0.8f, 1.0f);
+			spooky$endRadioStaticLoop = spooky$ensureLoop(spooky$endRadioStaticLoop, ModSounds.SPOOKY_RADIO_STATIC, 0.8f, 1.0f);
+			spooky$endRustySwingsLoop = spooky$ensureLoop(spooky$endRustySwingsLoop, ModSounds.SPOOKY_RUSTY_SWINGS, 0.2f, 1.0f);
+		} else {
+			spooky$stopLoop(spooky$endStaticLoop);
+			spooky$endStaticLoop = spooky$cleanupLoop(spooky$endStaticLoop);
+			spooky$stopLoop(spooky$endRadioStaticLoop);
+			spooky$endRadioStaticLoop = spooky$cleanupLoop(spooky$endRadioStaticLoop);
+			spooky$stopLoop(spooky$endRustySwingsLoop);
+			spooky$endRustySwingsLoop = spooky$cleanupLoop(spooky$endRustySwingsLoop);
 		}
 	}
 
