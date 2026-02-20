@@ -101,9 +101,9 @@ public class ServerPlayerEntityMixin {
 		ServerWorld world = (ServerWorld)player.getWorld();
 		world.setTimeOfDay(day ? 1000L : 18000L);
 		if (!day && !spooky$nightTriggered) {
-			spooky$nightTriggered = true;
+			spooky$nightTriggered = false; // Always play the sound and set it to rain
 			world.setWeather(0, 600, true, true);
-			player.playSoundToPlayer(ModSounds.SPOOKY_THUNDER_CRACK, SoundCategory.PLAYERS, 1.0f, 1.0f);
+			player.playSoundToPlayer(ModSounds.SPOOKY_NIGHTTIME_THUNDER, SoundCategory.PLAYERS, 1.0f, 1.0f);
 		}
 	}
 

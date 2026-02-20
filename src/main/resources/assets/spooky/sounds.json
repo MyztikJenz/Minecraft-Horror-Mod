@@ -121,5 +121,32 @@
     "sounds": [
       "spooky:you_didnt_say_the_magic_word"
     ]
+  },
+  "big_thunder_clap": {
+    "subtitle": "sounds.spookymod.big_thunder_clap",
+    "sounds": [
+      "spooky:big_thunder_clap"
+    ]
+  },
+  "loud_thunder_sound": {
+    "subtitle": "sounds.spookymod.loud_thunder_sound",
+    "sounds": [
+      "spooky:loud_thunder_sound"
+    ]
+  },
+  "simple_thunder": {
+    "subtitle": "sounds.spookymod.simple_thunder",
+    "sounds": [
+      "spooky:simple_thunder"
+    ]
+  },
+  "nighttime_thunder": {
+    "subtitle": "sounds.spookymod.nighttime_thunder",
+    "sounds": [
+      "spooky:simple_thunder",
+      "spooky:loud_thunder_sound",
+      "spooky:big_thunder_clap",
+      "spooky:thunder_crack"
+      ]
   }
 }
