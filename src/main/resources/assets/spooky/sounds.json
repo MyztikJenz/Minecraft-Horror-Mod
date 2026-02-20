@@ -91,5 +91,17 @@
       "spooky:open_the_door",
       "spooky:quick_screech"
     ]
+  },
+  "prepare_to_die": {
+  "subtitle": "sounds.spookymod.prepare_to_die",
+  "sounds": [
+    "spooky:prepare_to_die"
+  ]
+},
+  "thunder_crack": {
+    "subtitle": "sounds.spookymod.thunder_crack",
+    "sounds": [
+      "spooky:thunder_crack"
+    ]
   }
 }

@@ -21,6 +21,8 @@ public final class ModSounds {
 	public static final SoundEvent SPOOKY_OPEN_THE_DOOR = register("open_the_door");
 	public static final SoundEvent SPOOKY_QUICK_SCREECH = register("quick_screech");
 	public static final SoundEvent SPOOKY_COMBINED_SPOOKY_RECIPES = register("combined_spooky_recipes");
+	public static final SoundEvent SPOOKY_PREPARE_TO_DIE = register("prepare_to_die");
+	public static final SoundEvent SPOOKY_THUNDER_CRACK = register("thunder_crack");
 
 	private ModSounds() {
 	}

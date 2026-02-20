@@ -40,7 +40,7 @@ public class PlayerAdvancementTrackerMixin {
 		}
 
 		if (ENTER_THE_END.equals(advancement.id())) {
-			owner.playSoundToPlayer(ModSounds.SPOOKY_GHOST_BREATH, SoundCategory.PLAYERS, 1.0f, 1.0f);
+			owner.playSoundToPlayer(ModSounds.SPOOKY_PREPARE_TO_DIE, SoundCategory.PLAYERS, 1.0f, 1.0f);
 		} else if (ENTER_THE_NETHER.equals(advancement.id())) {
 			owner.playSoundToPlayer(ModSounds.SPOOKY_INCEPTION, SoundCategory.PLAYERS, 1.0f, 1.0f);
 		}

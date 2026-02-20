@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.recipe.RecipeEntry;
@@ -68,7 +69,7 @@ public class ServerPlayerEntityMixin {
 
 		if (teleportTarget.world().getRegistryKey() == World.END && spooky$teleportOrigin != World.END) {
 			ServerPlayerEntity player = (ServerPlayerEntity)(Object)this;
-			player.playSoundToPlayer(ModSounds.SPOOKY_INCEPTION, SoundCategory.PLAYERS, 1.0f, 1.0f);
+			player.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 999999, 1, false, true, true));
 		}
 	}
 
@@ -102,7 +103,7 @@ public class ServerPlayerEntityMixin {
 		if (!day && !spooky$nightTriggered) {
 			spooky$nightTriggered = true;
 			world.setWeather(0, 600, true, true);
-//			player.playSoundToPlayer(ModSounds.SPOOKY_INCEPTION, SoundCategory.PLAYERS, 1.0f, 1.0f);
+			player.playSoundToPlayer(ModSounds.SPOOKY_THUNDER_CRACK, SoundCategory.PLAYERS, 1.0f, 1.0f);
 		}
 	}
 

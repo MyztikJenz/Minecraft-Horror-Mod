@@ -75,11 +75,13 @@ public class LivingEntityMixin {
 			int x = MathHelper.floor(player.getX() + Math.cos(angle) * radius);
 			int z = MathHelper.floor(player.getZ() + Math.sin(angle) * radius);
 			int baseY = MathHelper.floor(player.getY());
+			int maxY = Math.min(world.getTopY() - 1, baseY + 16);
+			int minY = Math.max(world.getBottomY() + 1, baseY - 32);
 
 			BlockPos.Mutable pos = new BlockPos.Mutable();
 			boolean found = false;
-			for (int dy = 2; dy >= -2; dy--) {
-				pos.set(x, baseY + dy, z);
+			for (int y = maxY; y >= minY; y--) {
+				pos.set(x, y, z);
 				if (world.getBlockState(pos).isAir()
 					&& world.getBlockState(pos.up()).isAir()
 					&& world.getBlockState(pos.down()).isSolidBlock(world, pos.down())) {
