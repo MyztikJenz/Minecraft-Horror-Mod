@@ -168,6 +168,12 @@
       "spooky:scary-scream",
       "spooky:woman-screaming-long"
     ]
+  },
+  "mess_with_elterbug": {
+    "subtitle": "sounds.spookymod.mess_with_elterbug",
+    "sounds": [
+      "spooky:test3"
+    ]
   }
 }
 

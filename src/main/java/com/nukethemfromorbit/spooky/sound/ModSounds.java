@@ -29,6 +29,7 @@ public final class ModSounds {
 	public static final SoundEvent SPOOKY_NIGHTTIME_THUNDER = register("nighttime_thunder");
 	public static final SoundEvent SPOOKY_ANIMAL_DYING = register("animal_dying");
 	public static final SoundEvent SPOOKY_VILLAGER_INTERACTION = register("villager_interaction");
+	public static final SoundEvent SPOOKY_MESS_WITH_ELTERBUG = register("mess_with_elterbug");
 	private ModSounds() {
 	}
 

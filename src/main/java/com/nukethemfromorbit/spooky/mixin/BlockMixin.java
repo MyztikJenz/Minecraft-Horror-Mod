@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -18,6 +19,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Block.class)
 public class BlockMixin {
@@ -51,4 +53,13 @@ public class BlockMixin {
 			}
 		}
 	}
+
+//	@Inject(method = "onBreak", at = @At("HEAD"))
+//	private void spooky$onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfoReturnable<BlockState> cir) {
+//		if (world.isClient || !state.isOf(Blocks.DIRT) || !(player instanceof ServerPlayerEntity serverPlayer)) {
+//			return;
+//		}
+//
+//		serverPlayer.playSoundToPlayer(ModSounds.SPOOKY_MESS_WITH_ELTERBUG, SoundCategory.BLOCKS, 0.75f, 1.0f);
+//	}
 }

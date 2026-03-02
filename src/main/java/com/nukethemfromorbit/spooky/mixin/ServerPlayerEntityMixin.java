@@ -127,6 +127,9 @@ public class ServerPlayerEntityMixin {
 			if ((entity.getType() == EntityType.ENDERMAN || entity.getType() == EntityType.BLAZE) && !isEnd) {
 				continue;
 			}
+			if ((entity.getType() == EntityType.ZOMBIFIED_PIGLIN || entity.getType() == EntityType.PIGLIN) && isNether) {
+				continue;
+			}
 			if (entity instanceof ZombieEntity zombie && zombie.isBaby() && !isEnd) {
 				continue;
 			}
