@@ -1,2 +1,11 @@
 # Sound effects were from here
 https://pixabay.com/sound-effects/search
+
+# Summoning something
+/summon <whatever> ~15 ~ ~
+
+# Reset for testing
+/recipe take @s *
+/advancement revoke @s everything
+/tag @s remove spooky_first_crafting_table
+

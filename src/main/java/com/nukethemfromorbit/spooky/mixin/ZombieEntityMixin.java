@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ZombieEntityMixin {
 	private static final Identifier SPOOKY_BABY_SPEED_MODIFIER_ID = Identifier.of(Spooky.MOD_ID, "baby_speed_bonus");
 	private static final EntityAttributeModifier SPOOKY_BABY_SPEED_BONUS = new EntityAttributeModifier(
-		SPOOKY_BABY_SPEED_MODIFIER_ID, 0.65, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+		SPOOKY_BABY_SPEED_MODIFIER_ID, 0.85, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
 	);
 
 	@Inject(method = "setBaby", at = @At("TAIL"))

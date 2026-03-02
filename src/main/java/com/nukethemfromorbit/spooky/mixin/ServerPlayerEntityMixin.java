@@ -12,6 +12,8 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
@@ -110,6 +112,11 @@ public class ServerPlayerEntityMixin {
 	@Unique
 	private void spooky$removeNearbyHostiles(ServerPlayerEntity player) {
 		boolean blindnessActive = player.hasStatusEffect(StatusEffects.BLINDNESS);
+		RegistryKey<World> worldKey = player.getWorld().getRegistryKey();
+		boolean isOverworld = worldKey == World.OVERWORLD;
+		boolean isNether = worldKey == World.NETHER;
+		boolean isEnd = worldKey == World.END;
+		Random random = player.getRandom();
 		double radius = 10.0;
 		Box box = Box.of(player.getPos(), radius * 2.0, radius * 2.0, radius * 2.0);
 		int removed = 0;
@@ -117,15 +124,73 @@ public class ServerPlayerEntityMixin {
 			if (entity.getType() == EntityType.ENDER_DRAGON) {
 				continue;
 			}
+			if ((entity.getType() == EntityType.ENDERMAN || entity.getType() == EntityType.BLAZE) && !isEnd) {
+				continue;
+			}
+			if (entity instanceof ZombieEntity zombie && zombie.isBaby() && !isEnd) {
+				continue;
+			}
 			if (!entity.isRemoved()) {
+				boolean replacedWithBabyZombie = false;
+				if ((isOverworld || isNether) && random.nextFloat() < 0.3f) {
+					replacedWithBabyZombie = spooky$spawnBabyZombieReplacement(player, entity);
+				}
 				entity.remove(Entity.RemovalReason.DISCARDED);
-				removed++;
+				if (!replacedWithBabyZombie) {
+					removed++;
+				}
 			}
 		}
 
 		if (blindnessActive && removed > 0) {
 			spooky$spawnReplacementHostiles(player, removed);
 		}
+	}
+
+	@Unique
+	private boolean spooky$spawnBabyZombieReplacement(ServerPlayerEntity player, Entity removedEntity) {
+		ServerWorld world = (ServerWorld)player.getWorld();
+		Random random = world.getRandom();
+		ChickenEntity chicken = null;
+		if (random.nextFloat() < 0.25f) {
+			chicken = EntityType.CHICKEN.create(world);
+			if (chicken == null) {
+				return false;
+			}
+
+			chicken.refreshPositionAndAngles(removedEntity.getX(), removedEntity.getY(), removedEntity.getZ(), removedEntity.getYaw(), removedEntity.getPitch());
+			if (!world.isSpaceEmpty(chicken)) {
+				chicken = null;
+			}
+		}
+
+		ZombieEntity zombie = EntityType.ZOMBIE.create(world);
+		if (zombie == null) {
+			return false;
+		}
+
+		zombie.refreshPositionAndAngles(removedEntity.getX(), removedEntity.getY(), removedEntity.getZ(), removedEntity.getYaw(), removedEntity.getPitch());
+		zombie.setBaby(true);
+		if (!world.isSpaceEmpty(zombie)) {
+			return false;
+		}
+
+		if (chicken != null && !world.spawnEntity(chicken)) {
+			return false;
+		}
+
+		if (!world.spawnEntity(zombie)) {
+			if (chicken != null && !chicken.isRemoved()) {
+				chicken.remove(Entity.RemovalReason.DISCARDED);
+			}
+			return false;
+		}
+
+		if (chicken != null) {
+			zombie.startRiding(chicken, true);
+		}
+
+		return true;
 	}
 
 	@Unique
