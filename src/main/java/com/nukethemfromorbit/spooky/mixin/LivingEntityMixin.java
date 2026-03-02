@@ -1,5 +1,6 @@
 package com.nukethemfromorbit.spooky.mixin;
 
+import com.nukethemfromorbit.spooky.sound.ModSounds;
 import net.minecraft.entity.Entity;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,24 +11,31 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin {
+public abstract class LivingEntityMixin {
 	@Unique
 	private boolean spooky$hadBlindnessBeforeAdd;
 	@Unique
 	private static List<EntityType<? extends HostileEntity>> spooky$hostileTypes;
+
+	@Shadow
+	protected abstract SoundEvent getDeathSound();
 
 	@Inject(method = "addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z", at = @At("HEAD"))
 	private void spooky$recordBlindnessBeforeAdd(StatusEffectInstance effect, Entity source, CallbackInfoReturnable<Boolean> cir) {
@@ -60,6 +68,25 @@ public class LivingEntityMixin {
 		spooky$spawnBlindnessHostiles(player);
 	}
 
+	@Redirect(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;getDeathSound()Lnet/minecraft/sound/SoundEvent;"))
+	private SoundEvent spooky$replaceAnimalDeathSoundDuringDamage(LivingEntity entity) {
+		return spooky$getReplacementDeathSound(entity);
+	}
+
+	@Redirect(method = "handleStatus", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;getDeathSound()Lnet/minecraft/sound/SoundEvent;"))
+	private SoundEvent spooky$replaceAnimalDeathSoundDuringStatus(LivingEntity entity) {
+		return spooky$getReplacementDeathSound(entity);
+	}
+
+
+	@Unique
+	private SoundEvent spooky$getReplacementDeathSound(LivingEntity entity) {
+		if (entity instanceof AnimalEntity) {
+			return ModSounds.SPOOKY_ANIMAL_DYING;
+		}
+
+		return this.getDeathSound();
+	}
 
 	@Unique
 	private void spooky$spawnBlindnessHostiles(ServerPlayerEntity player) {

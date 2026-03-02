@@ -148,5 +148,26 @@
       "spooky:big_thunder_clap",
       "spooky:thunder_crack"
       ]
+  },
+  "animal_dying": {
+    "subtitle": "sounds.spookymod.animal_dying",
+    "sounds": [
+      "spooky:animal-dying",
+      "spooky:zombie-dying",
+      "spooky:dramatic-death",
+      "spooky:dying-sound"
+    ]
+  },
+  "villager_interaction": {
+    "subtitle": "sounds.spookymod.villager_interaction",
+    "sounds": [
+      "spooky:female-scream-short",
+      "spooky:male-death-scream",
+      "spooky:man-scream-long",
+      "spooky:panic-stricken-female-scream",
+      "spooky:scary-scream",
+      "spooky:woman-screaming-long"
+    ]
   }
 }
+
