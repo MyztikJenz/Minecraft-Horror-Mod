@@ -18,21 +18,22 @@ public class ZombieEntityMixin {
 		SPOOKY_BABY_SPEED_MODIFIER_ID, 0.85, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
 	);
 
-	@Inject(method = "setBaby", at = @At("TAIL"))
-	private void spooky$boostBabySpeed(boolean baby, CallbackInfo ci) {
-		ZombieEntity zombie = (ZombieEntity)(Object)this;
-		if (zombie.getWorld() == null || zombie.getWorld().isClient) {
-			return;
-		}
-
-		EntityAttributeInstance speedAttribute = zombie.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
-		if (speedAttribute == null) {
-			return;
-		}
-
-		speedAttribute.removeModifier(SPOOKY_BABY_SPEED_MODIFIER_ID);
-		if (baby) {
-			speedAttribute.addTemporaryModifier(SPOOKY_BABY_SPEED_BONUS);
-		}
-	}
+//	@Inject(method = "setBaby", at = @At("TAIL"))
+//	private void spooky$boostBabySpeed(boolean baby, CallbackInfo ci) {
+//		return; // This was too much
+//		ZombieEntity zombie = (ZombieEntity)(Object)this;
+//		if (zombie.getWorld() == null || zombie.getWorld().isClient) {
+//			return;
+//		}
+//
+//		EntityAttributeInstance speedAttribute = zombie.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+//		if (speedAttribute == null) {
+//			return;
+//		}
+//
+//		speedAttribute.removeModifier(SPOOKY_BABY_SPEED_MODIFIER_ID);
+//		if (baby) {
+//			speedAttribute.addTemporaryModifier(SPOOKY_BABY_SPEED_BONUS);
+//		}
+//	}
 }

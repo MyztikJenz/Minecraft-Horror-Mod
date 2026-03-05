@@ -135,7 +135,7 @@ public class ServerPlayerEntityMixin {
 			}
 			if (!entity.isRemoved()) {
 				boolean replacedWithBabyZombie = false;
-				if ((isOverworld || isNether) && random.nextFloat() < 0.3f) {
+				if ((isOverworld || isNether) && random.nextFloat() < 0.05f) {
 					replacedWithBabyZombie = spooky$spawnBabyZombieReplacement(player, entity);
 				}
 				entity.remove(Entity.RemovalReason.DISCARDED);
